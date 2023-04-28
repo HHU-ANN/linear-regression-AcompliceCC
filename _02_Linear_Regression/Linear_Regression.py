@@ -9,13 +9,18 @@ except ImportError as e:
     import numpy as np
 
 def ridge(data):
-    X,y=read_data()
-    z=np.matmul(X.T,X)+np.eye(X.shape[5])*(0.01)
-    weight=np.matmul(np.linalg.inv(z),np.matmul(X.T,y))
+    m = X.shape[0]  # 数据量
+    n = X.shape[1]  # 特征量
+    iternum=400
+    alpha=0.01
+    lamda=0.001
+    costs = np.ones(iternum)
+    for i in range(iternum):
+        for j in range(n):
+            weight[j] = weight[j] + np.sum((y - np.matmul(X, weight)) * X[:, j].reshape(-1, 1)) * (alpha / m) - 2 * lamda * weight[j]
     return weight @ data
     
 def lasso(data):
-    
     return ridge(data)
 
 def read_data(path='./data/exp02/'):
