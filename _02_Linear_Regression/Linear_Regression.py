@@ -10,11 +10,12 @@ except ImportError as e:
 
 def ridge(data):
     X,y=read_data()
-    z=np.matmul(X.T,X)+np.eye(X.shape[1])*0.4
+    z=np.matmul(X.T,X)+np.eye(X.shape[1])*0.6
     weight=np.matmul(np.linalg.inv(z),np.matmul(X.T,y))
     return weight @ data
     
 def lasso(data):
+    
     return ridge(data)
 
 def read_data(path='./data/exp02/'):
