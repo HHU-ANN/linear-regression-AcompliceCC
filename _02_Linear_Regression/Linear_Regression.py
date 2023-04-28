@@ -12,13 +12,11 @@ def ridge(data):
     X,y=read_data()
     m,n=X.shape
     w=np.zeros(n)
-    max_iterations=100
+    max_iterations=400
+    a=(X @ w - y)
     for i in range(max_iterations):
-        # 计算梯度
-        grad = (X.T @ (X @ w - y)) + 0.1 * w
-        # 更新权重
-        w -= 0.01 * grad
-  return w @ data
+         w=w+0.01*(X.T@a) 
+    return w @ data
     
 def lasso(data):
     return ridge(data)
