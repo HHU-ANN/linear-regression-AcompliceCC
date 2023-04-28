@@ -9,6 +9,7 @@ except ImportError as e:
     import numpy as np
 
 def ridge(data):
+     X,y=read_data()
     m = X.shape[0]  # 数据量
     n = X.shape[1]  # 特征量
     iternum=400
