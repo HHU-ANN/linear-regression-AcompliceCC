@@ -10,13 +10,18 @@ except ImportError as e:
 
 def ridge(data):
     X,y=read_data()
-    m,n=X.shape
-    w=np.zeros(n)
-    max_iterations=400
-    a=(X @ w - y)
+    # z=np.matmul(X.T,X)+np.eye(X.shape[1])*0.2
+    # weight=np.matmul(np.linalg.inv(z),np.matmul(X.T,y))
+    m, n = X.shape
+    w = np.zeros(n)
+    max_iterations = 1000000
     for i in range(max_iterations):
-         w=w+0.01*(X.T@a) 
-    return w @ data
+        # 计算梯度
+        grad = (np.matmul(X.T, (np.matmul(X, w) - y))) + 1e-12 * 0.01 * w
+        w = w - 1e-12 * grad
+        if np.linalg.norm(grad) < 0.0001:
+            break
+  return w @ data
     
 def lasso(data):
     return ridge(data)
