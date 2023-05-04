@@ -11,7 +11,7 @@ except ImportError as e:
 def ridge(data):
     X,y=read_data()
     #X=(X-np.min(X))/(np.max(X)-np.min(X))
-    z=np.matmul(X.T,X)+np.eye(X.shape[1])*(-0.01)
+    z=np.matmul(X.T,X)+np.eye(X.shape[1])*(-0.1)
     weight=np.matmul(np.linalg.inv(z),np.matmul(X.T,y))
    # m, n = X.shape
    # weight = np.zeros(n)
