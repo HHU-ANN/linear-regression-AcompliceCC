@@ -47,7 +47,7 @@ def lasso(data):
          if (0.0001 >= lassoloss):
              lassoloss=0.0001  
              best = w
-    return weight @ data
+    return w @ data
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
