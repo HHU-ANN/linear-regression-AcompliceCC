@@ -25,38 +25,28 @@ def ridge(data):
     return weight @ data
     
 def lasso(data):
-      X,y=read_data()
-#     m, n = X.shape
-#     weight = np.zeros(n)
-#     max_iterations = 100000
-#     for i in range(max_iterations):
-#         grad = (np.matmul(X.T, (np.matmul(X, weight) - y))) + 30 * np.sign(weight)
-#         weight = weight - 1e-12 * grad
-#         if np.linalg.norm(grad) < 0.0001:
-#            break
-        m,n=X.shape
-        w=np.zeros(n)
-        alpha=0.01
-        beta=1e-12
-        mse = np.sum(((X @ w )- y.T) @ ((X @ w) - y.T).T)/(np.shape(X)[0])
-        l1 = alpha * ((np.sum(np.abs(w))))
-        lassoloss = mse + l1
-        max_iterations=1000000
-        for i in range(max_iterations):
-            mse = np.sum(((X @ w )- y.T) @ ((X @ w) - y.T).T)/(np.shape(X)[0])
-            l1 = alpha * ((np.sum(np.abs(w))))
-            lassoloss = mse + l1
-            dw = X.T @ ((X @ w) - y.T) + alpha * np.sign(w) 
-            loss_old = lassoloss#记录上一次的风险损失
-            w = w - beta * dw
-        # 后边损失函数下降十分缓慢，设置提前停止的条件
-            if (np.abs(0.0001 - loss_old) < 0.0001):
-                print('提前停止！')
+     X,y=read_data()
+     m,n=X.shape
+     w=np.zeros(n)
+     alpha=0.01
+     beta=1e-12
+     mse = np.sum(((X @ w )- y.T) @ ((X @ w) - y.T).T)/(np.shape(X)[0])
+     l1 = alpha * ((np.sum(np.abs(w))))
+     lassoloss = mse + l1
+     max_iterations=1000000
+     for i in range(max_iterations):
+         mse = np.sum(((X @ w )- y.T) @ ((X @ w) - y.T).T)/(np.shape(X)[0])
+         l1 = alpha * ((np.sum(np.abs(w))))
+         lassoloss = mse + l1
+         dw = X.T @ ((X @ w) - y.T) + alpha * np.sign(w) 
+         loss_old = lassoloss
+         w = w - beta * dw
+         if (np.abs(0.0001 - loss_old) < 0.0001):
+            print('提前停止！')
             break
-        # 获取最小损失时候的参数w
-            if (0.0001 >= lassoloss):
-                lassoloss=0.0001  
-                best = w
+         if (0.0001 >= lassoloss):
+             lassoloss=0.0001  
+             best = w
     return weight @ data
 
 def read_data(path='./data/exp02/'):
