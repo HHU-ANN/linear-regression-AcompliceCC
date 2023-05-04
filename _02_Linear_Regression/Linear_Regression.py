@@ -25,7 +25,7 @@ def ridge(data):
     return weight @ data
     
 def lasso(data):
-#     X,y=read_data()
+      X,y=read_data()
 #     m, n = X.shape
 #     weight = np.zeros(n)
 #     max_iterations = 100000
