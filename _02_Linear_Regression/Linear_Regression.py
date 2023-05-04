@@ -30,7 +30,6 @@ def lasso(data):
     weight = np.zeros(n)
     max_iterations = 1000000
     for i in range(max_iterations):
-        计算梯度
         grad = (np.matmul(X.T, (np.matmul(X, weight) - y))) + 1e-12 * np.sign(weight)
         weight = weight - 1e-12 * grad
         if np.linalg.norm(grad) < 0.0001:
