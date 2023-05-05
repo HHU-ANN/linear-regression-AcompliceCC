@@ -25,6 +25,7 @@ def ridge(data):
     return weight @ data
     
 def lasso(data):
+    X,y=read_data()
     m, n = X.shape
     weight = np.array([ 1.49462254e+01, -2.50275342e-01, -8.76423816e-03,  1.23727270e+00,
        -1.80224871e+02, -2.10165019e+02])
