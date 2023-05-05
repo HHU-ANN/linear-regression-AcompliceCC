@@ -25,28 +25,15 @@ def ridge(data):
     return weight @ data
     
 def lasso(data):
-#      X,y=read_data()
-#      m,n=X.shape
-#      w=np.zeros(n)
-#      alpha=0.01
-#      beta=1e-12
-#      mse = np.sum(((X @ w )- y.T) @ ((X @ w) - y.T).T)/(np.shape(X)[0])
-#      l1 = alpha * ((np.sum(np.abs(w))))
-#      lassoloss = mse + l1
-#      max_iterations=1000000
-#      for i in range(max_iterations):
-#          mse = np.sum(((X @ w )- y.T) @ ((X @ w) - y.T).T)/(np.shape(X)[0])
-#          l1 = alpha * ((np.sum(np.abs(w))))
-#          lassoloss = mse + l1
-#          dw = X.T @ ((X @ w) - y.T) + alpha * np.sign(w) 
-#          loss_old = lassoloss
-#          w = w - beta * dw
-#          if (np.abs(0.0001 - loss_old) < 0.0001):
-#             print('提前停止！')
-#             break
-#          if (0.0001 >= lassoloss):
-#              lassoloss=0.0001  
-#              best = w
+    m, n = X.shape
+    weight = np.array([ 1.49462254e+01, -2.50275342e-01, -8.76423816e-03,  1.23727270e+00,
+       -1.80224871e+02, -2.10165019e+02])
+    max_iterations = 100000
+    for i in range(max_iterations):
+       grad = (np.matmul(X.T, (np.matmul(X, weight) - y))) + 30 * np.sign(weight)
+       weight = weight - 1e-12 * grad
+       if np.linalg.norm(grad) < 0.0001:
+           break
     return ridge(data)
 
 def read_data(path='./data/exp02/'):
